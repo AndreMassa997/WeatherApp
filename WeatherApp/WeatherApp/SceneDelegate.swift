@@ -20,6 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
+        AppPreferences.shared.palette = UITraitCollection.current.userInterfaceStyle == .dark ? DarkPalette() : LightPalette()
+        
         let mainViewModel = MainViewModel()
         let viewController = MainViewController(viewModel: mainViewModel)
         
@@ -29,8 +31,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
         window.makeKeyAndVisible()
     }
-
-
-
 }
 

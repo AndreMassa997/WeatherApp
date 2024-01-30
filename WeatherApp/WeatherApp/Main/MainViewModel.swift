@@ -7,8 +7,8 @@
 
 import UIKit
 
-class MainViewModel: ViewModel {
-    func bindProperties() {
+class MainViewModel: MVVMViewModel {
+    override func bindProperties() {
         
     }
     
