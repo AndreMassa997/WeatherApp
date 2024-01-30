@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         AppPreferences.shared.palette = UITraitCollection.current.userInterfaceStyle == .dark ? DarkPalette() : LightPalette()
         
-        let mainViewModel = MainViewModel()
+        let mainViewModel = MainViewModel(dataProvider: NetworkManager())
         let viewController = MainViewController(viewModel: mainViewModel)
         
         let navigationController = UINavigationController(rootViewController: viewController)

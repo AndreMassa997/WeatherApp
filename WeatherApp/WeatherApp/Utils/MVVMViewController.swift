@@ -1,5 +1,5 @@
 //
-//  BaseViewController.swift
+//  MVVMViewController.swift
 //  WeatherApp
 //
 //  Created by Andrea Massari on 30/01/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BaseViewController<ViewModel: MVVMViewModel>: UIViewController{
+class MVVMViewController<ViewModel: MVVMViewModel>: UIViewController{
     var viewModel: ViewModel
     
     init(viewModel: ViewModel) {
@@ -22,7 +22,11 @@ class BaseViewController<ViewModel: MVVMViewModel>: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
-        
+        bindProperties()
+    }
+    
+    func bindProperties() {
+       
     }
   
     func setupNavigationBar(hasLargeTitle: Bool = false){

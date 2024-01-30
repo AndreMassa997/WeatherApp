@@ -17,7 +17,22 @@ class AppPreferences{
         }
     }
     
+    var savedCities: [String]?{
+        set{
+            guard let citiesToSave = newValue?.joined(separator: "|") else { return }
+            saveUserPreferences(name: "cities", value: citiesToSave)
+        }
+        get{
+            guard let joinedCity = getUserPreferences(name: "cities") as? String else { return nil }
+            return joinedCity.components(separatedBy: "|")
+        }
+    }
+    
     private func saveUserPreferences(name: String, value: Any){
         UserDefaults.standard.set(value, forKey: name)
+    }
+    
+    private func getUserPreferences(name: String) -> Any?{
+        UserDefaults.standard.object(forKey: name)
     }
 }

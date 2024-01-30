@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Combine
 
-class MainViewController: BaseViewController<MainViewModel> {
+class MainViewController: MVVMViewController<MainViewModel> {
     
     private lazy var carousel: MainCarouselView = {
         let carousel = MainCarouselView()
@@ -18,9 +19,9 @@ class MainViewController: BaseViewController<MainViewModel> {
     private lazy var pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.numberOfPages = 3
-        pageControl.currentPage = 0
         pageControl.pageIndicatorTintColor = .palette.barBackgroundColor
         pageControl.currentPageIndicatorTintColor = .palette.barTintColor
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
         return pageControl
     }()
 
@@ -30,6 +31,17 @@ class MainViewController: BaseViewController<MainViewModel> {
         self.title = "MAIN.APP.TITLE".localized
         setupView()
         setupConstraints()
+        viewModel.getFirstTimeCity()
+    }
+    
+    override func bindProperties() {
+        super.bindProperties()
+        viewModel.$weatherForCity
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] _ in
+                self?.updateView()
+            })
+            .store(in: &viewModel.anyCancellables)
     }
     
     private func setupView(){
@@ -45,9 +57,13 @@ class MainViewController: BaseViewController<MainViewModel> {
             carousel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             pageControl.leftAnchor.constraint(equalTo: view.leftAnchor),
             pageControl.rightAnchor.constraint(equalTo: view.rightAnchor),
-            pageControl.heightAnchor.constraint(equalToConstant: 50),
-            pageControl.bottomAnchor.constraint(equalTo: carousel.bottomAnchor),
+            pageControl.heightAnchor.constraint(equalToConstant: 25),
+            pageControl.bottomAnchor.constraint(equalTo: carousel.bottomAnchor, constant: -10),
         ])
+    }
+    
+    private func updateView(){
+        
     }
 }
 
