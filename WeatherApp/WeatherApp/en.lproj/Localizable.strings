@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  WeatherApp
+
+  Created by Andrea Massari on 30/01/24.
+  
+*/
+
+"MAIN.APP.TITLE" = "Weather";

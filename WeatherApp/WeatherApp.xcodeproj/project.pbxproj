@@ -21,6 +21,9 @@
 		3E76F3CB2B68FA7400BF181F /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E76F3CA2B68FA7400BF181F /* Palette.swift */; };
 		3E76F3CD2B68FCDE00BF181F /* AppPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E76F3CC2B68FCDE00BF181F /* AppPreferences.swift */; };
 		3E76F3CF2B68FD9200BF181F /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E76F3CE2B68FD9200BF181F /* UIColor+Ext.swift */; };
+		3E76F3D42B69011900BF181F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E76F3D62B69011900BF181F /* Localizable.strings */; };
+		3E76F3D82B69019E00BF181F /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E76F3D72B69019E00BF181F /* String+Ext.swift */; };
+		3E76F3DA2B69079400BF181F /* MainCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E76F3D92B69079400BF181F /* MainCarouselView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +62,9 @@
 		3E76F3CA2B68FA7400BF181F /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		3E76F3CC2B68FCDE00BF181F /* AppPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferences.swift; sourceTree = "<group>"; };
 		3E76F3CE2B68FD9200BF181F /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
+		3E76F3D52B69011900BF181F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3E76F3D72B69019E00BF181F /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		3E76F3D92B69079400BF181F /* MainCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCarouselView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +123,7 @@
 				3E76F39A2B68E6BD00BF181F /* Assets.xcassets */,
 				3E76F39C2B68E6BD00BF181F /* LaunchScreen.storyboard */,
 				3E76F39F2B68E6BD00BF181F /* Info.plist */,
+				3E76F3D62B69011900BF181F /* Localizable.strings */,
 			);
 			path = WeatherApp;
 			sourceTree = "<group>";
@@ -143,6 +150,7 @@
 			children = (
 				3E76F3952B68E6BC00BF181F /* MainViewController.swift */,
 				3E76F3C22B68E8F000BF181F /* MainViewModel.swift */,
+				3E76F3D92B69079400BF181F /* MainCarouselView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -162,6 +170,7 @@
 			children = (
 				3E76F3CA2B68FA7400BF181F /* Palette.swift */,
 				3E76F3CE2B68FD9200BF181F /* UIColor+Ext.swift */,
+				3E76F3D72B69019E00BF181F /* String+Ext.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -271,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E76F39E2B68E6BD00BF181F /* LaunchScreen.storyboard in Resources */,
+				3E76F3D42B69011900BF181F /* Localizable.strings in Resources */,
 				3E76F39B2B68E6BD00BF181F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,6 +314,8 @@
 				3E76F3C82B68EB1C00BF181F /* MVVMViewModel.swift in Sources */,
 				3E76F3CF2B68FD9200BF181F /* UIColor+Ext.swift in Sources */,
 				3E76F3C32B68E8F000BF181F /* MainViewModel.swift in Sources */,
+				3E76F3DA2B69079400BF181F /* MainCarouselView.swift in Sources */,
+				3E76F3D82B69019E00BF181F /* String+Ext.swift in Sources */,
 				3E76F3CB2B68FA7400BF181F /* Palette.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,6 +359,14 @@
 				3E76F39D2B68E6BD00BF181F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		3E76F3D62B69011900BF181F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3E76F3D52B69011900BF181F /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

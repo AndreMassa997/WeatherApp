@@ -25,8 +25,9 @@ class BaseViewController<ViewModel: MVVMViewModel>: UIViewController{
         
     }
   
-    func setupNavigationBar(largeTitle: Bool = false){
+    func setupNavigationBar(hasLargeTitle: Bool = false){
         self.navigationController?.navigationBar.tintColor = .palette.barTintColor
         self.navigationController?.navigationBar.backgroundColor = .palette.barBackgroundColor
+        self.navigationController?.navigationBar.prefersLargeTitles = hasLargeTitle
     }
 }
