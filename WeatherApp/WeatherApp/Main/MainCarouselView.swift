@@ -58,19 +58,33 @@ class MainCarouselItem: UICollectionViewCell, Reusable{
         return sv
     }()
     
-    private lazy var mainIcon: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
-        return iv
+    private lazy var lastUpdatedLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        return lbl
     }()
     
     private lazy var mainName: UILabel = {
         let lbl = UILabel()
+        lbl.font = UIFont.systemFont(ofSize: 28, weight: .semibold)
+        return lbl
+    }()
+    
+    private lazy var currentTemperature: UILabel = {
+        let lbl = UILabel()
+        lbl.font = UIFont.systemFont(ofSize: 48, weight: .light)
+        return lbl
+    }()
+    
+    private lazy var minMaxTemperature: UILabel = {
+        let lbl = UILabel()
+        lbl.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         return lbl
     }()
     
     private lazy var currentWeather: UILabel = {
         let lbl = UILabel()
+        lbl.font = UIFont.systemFont(ofSize: 22, weight: .medium)
         return lbl
     }()
     
@@ -85,8 +99,9 @@ class MainCarouselItem: UICollectionViewCell, Reusable{
     }
     
     private func addSubviews(){
-        stackView.addArrangedSubview(mainIcon)
+        stackView.addArrangedSubview(lastUpdatedLabel)
         stackView.addArrangedSubview(mainName)
+        stackView.addArrangedSubview(currentTemperature)
         stackView.addArrangedSubview(currentWeather)
         scrollView.addSubview(stackView)
         self.contentView.addSubview(scrollView)
@@ -102,13 +117,15 @@ class MainCarouselItem: UICollectionViewCell, Reusable{
             stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             stackView.leftAnchor.constraint(greaterThanOrEqualTo: scrollView.leftAnchor, constant: 15),
             stackView.rightAnchor.constraint(lessThanOrEqualTo: scrollView.rightAnchor, constant: -15),
-            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor)
+            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
         ])
     }
     
     func configure(data: WeatherForCity){
         self.mainName.text = data.currentWeather?.location.name.capitalized
         self.currentWeather.text = data.currentWeather?.current.condition.text
-        self.mainIcon.image = data.image
+        self.currentTemperature.text = data.temperatureString
+        self.lastUpdatedLabel.text = data.lastUpdateString
+        self.backgroundColor = data.backgroundColor
     }
 }

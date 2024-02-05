@@ -23,11 +23,14 @@ class MainViewController: MVVMViewController<MainViewModel> {
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         return pageControl
     }()
+    
+    override var isNavigationBarHidden: Bool{
+        return true
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.title = "MAIN.APP.TITLE".localized
         setupView()
         setupConstraints()
         viewModel.getFirstTimeCity()
@@ -46,6 +49,7 @@ class MainViewController: MVVMViewController<MainViewModel> {
     private func setupView(){
         self.view.addSubview(carousel)
         self.view.addSubview(pageControl)
+        self.view.backgroundColor = AppPreferences.shared.palette.barBackgroundColor
     }
     
     private func setupConstraints(){

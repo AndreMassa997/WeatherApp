@@ -10,6 +10,8 @@ import UIKit
 class MVVMViewController<ViewModel: MVVMViewModel>: UIViewController{
     var viewModel: ViewModel
     
+    var isNavigationBarHidden: Bool { get { return true }}
+    
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -23,6 +25,11 @@ class MVVMViewController<ViewModel: MVVMViewModel>: UIViewController{
         super.viewDidLoad()
         setupNavigationBar()
         bindProperties()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = self.isNavigationBarHidden
     }
     
     func bindProperties() {

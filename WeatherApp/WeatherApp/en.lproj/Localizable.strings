@@ -7,3 +7,4 @@
 */
 
 "MAIN.APP.TITLE" = "Weather";
+"MAIN.APP.LAST_UPDATE" = "Last update at ";

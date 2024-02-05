@@ -29,6 +29,7 @@
 		3E76F3DF2B690F7D00BF181F /* MVVMModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E76F3DE2B690F7D00BF181F /* MVVMModel.swift */; };
 		3E76F3E12B69106700BF181F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E76F3E02B69106700BF181F /* NetworkManager.swift */; };
 		3E76F3E32B6952DF00BF181F /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E76F3E22B6952DF00BF181F /* Reusable.swift */; };
+		3EE9A4D92B70F4350019950D /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE9A4D82B70F4350019950D /* Date+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		3E76F3DE2B690F7D00BF181F /* MVVMModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVMModel.swift; sourceTree = "<group>"; };
 		3E76F3E02B69106700BF181F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3E76F3E22B6952DF00BF181F /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		3EE9A4D82B70F4350019950D /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 		3E76F3C42B68E90B00BF181F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				3EE9A4D72B70F4210019950D /* Extensions */,
 				3E76F3DE2B690F7D00BF181F /* MVVMModel.swift */,
 				3E76F3C72B68EB1C00BF181F /* MVVMViewModel.swift */,
 				3E76F3C52B68EAD800BF181F /* MVVMViewController.swift */,
@@ -192,8 +195,6 @@
 			isa = PBXGroup;
 			children = (
 				3E76F3CA2B68FA7400BF181F /* Palette.swift */,
-				3E76F3CE2B68FD9200BF181F /* UIColor+Ext.swift */,
-				3E76F3D72B69019E00BF181F /* String+Ext.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -204,6 +205,16 @@
 				3E76F3E02B69106700BF181F /* NetworkManager.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		3EE9A4D72B70F4210019950D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3E76F3CE2B68FD9200BF181F /* UIColor+Ext.swift */,
+				3E76F3D72B69019E00BF181F /* String+Ext.swift */,
+				3EE9A4D82B70F4350019950D /* Date+Ext.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -341,6 +352,7 @@
 				3E76F3C62B68EAD800BF181F /* MVVMViewController.swift in Sources */,
 				3E76F3962B68E6BC00BF181F /* MainViewController.swift in Sources */,
 				3E76F3CD2B68FCDE00BF181F /* AppPreferences.swift in Sources */,
+				3EE9A4D92B70F4350019950D /* Date+Ext.swift in Sources */,
 				3E76F3922B68E6BC00BF181F /* AppDelegate.swift in Sources */,
 				3E76F3942B68E6BC00BF181F /* SceneDelegate.swift in Sources */,
 				3E76F3C82B68EB1C00BF181F /* MVVMViewModel.swift in Sources */,
