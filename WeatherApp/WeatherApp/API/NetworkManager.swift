@@ -6,13 +6,15 @@
 //
 
 import Foundation
+import UIKit
 
 protocol NetworkManagerProvider{
-    func getCurrentWeather(from location: String) async -> (CurrentWeather?, ErrorData?)
+    func getCurrentWeather(from location: String) async -> (weather: CurrentWeather?, error: ErrorData?)
+    func getImage(by url: String) async -> (image: UIImage?, error: ErrorData?)
 }
 
 class NetworkManager: NetworkManagerProvider{
-    func getCurrentWeather(from location: String) async -> (CurrentWeather?, ErrorData?) {
+    func getCurrentWeather(from location: String) async -> (weather: CurrentWeather?, error: ErrorData?) {
         return await webCall(with: "current.json", params: [("q", location)])
     }
     
@@ -27,6 +29,7 @@ class NetworkManager: NetworkManagerProvider{
         }
         urlComponents.queryItems?.append(URLQueryItem(name: "key", value: key))
         guard let url = urlComponents.url else {
+            print("🔴 Invalid URL")
             return (nil, .invalidURL)
         }
         
@@ -50,6 +53,30 @@ class NetworkManager: NetworkManagerProvider{
         }
     }
     
+    func getImage(by url: String) async -> (image: UIImage?, error: ErrorData?) {
+        let url = URL(string: "https:\(url)")
+        
+        guard let url else {
+            print("🔴 Invalid URL")
+            return (nil, .invalidURL)
+        }
+        print("🔵 URL: \(url.absoluteString)")
+        
+        guard let dataResponse = try? await URLSession.shared.data(from: url) else{
+            print("🔴 Invalid Data Error")
+            return (nil, .invalidData)
+        }
+        
+        let data = dataResponse.0
+        print("🟢 Retrieved image from URL: \(url.absoluteString)")
+        
+        guard let image = UIImage(data: data) else {
+            print("🔴 Decoding image error")
+            return (nil, .decodingError)
+        }
+        
+        return (image, nil)
+    }
 }
 
 enum ErrorData: Error{

@@ -9,7 +9,7 @@ import Combine
 
 class MainViewModel: MVVMViewModel {
     
-    @Published var weatherForCity: [(CurrentWeather?, ErrorData?)] = []
+    @Published var weatherForCity: [WeatherForCity] = []
     @Published var currentPage: Int = 0
     
     private var cities: [String] = []
@@ -24,7 +24,12 @@ class MainViewModel: MVVMViewModel {
         Task{
             for city in cities {
                 async let weather = self.dataProvider.getCurrentWeather(from: city)
-                await self.weatherForCity.append(weather)
+                if let icon = await weather.weather?.current.condition.icon{
+                    async let image = self.dataProvider.getImage(by: icon).image
+                    await self.weatherForCity.append(WeatherForCity(currentWeather: weather.weather, error: weather.error, city: city, image: image))
+                }else{
+                    await self.weatherForCity.append(WeatherForCity(currentWeather: weather.weather, error: weather.error, city: city))
+                }
             }
         }
     }

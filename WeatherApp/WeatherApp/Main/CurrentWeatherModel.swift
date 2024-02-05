@@ -5,7 +5,14 @@
 //  Created by Andrea Massari on 30/01/24.
 //
 
-import Foundation
+import UIKit
+
+struct WeatherForCity{
+    let currentWeather: CurrentWeather?
+    let error: ErrorData?
+    let city: String
+    var image: UIImage?
+}
 
 struct CurrentWeather: MVVMModel{
     let location: Location

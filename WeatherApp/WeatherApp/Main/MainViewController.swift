@@ -18,7 +18,6 @@ class MainViewController: MVVMViewController<MainViewModel> {
     
     private lazy var pageControl: UIPageControl = {
         let pageControl = UIPageControl()
-        pageControl.numberOfPages = 3
         pageControl.pageIndicatorTintColor = .palette.barBackgroundColor
         pageControl.currentPageIndicatorTintColor = .palette.barTintColor
         pageControl.translatesAutoresizingMaskIntoConstraints = false
@@ -63,7 +62,8 @@ class MainViewController: MVVMViewController<MainViewModel> {
     }
     
     private func updateView(){
-        
+        pageControl.numberOfPages = viewModel.weatherForCity.count
+        carousel.data = viewModel.weatherForCity
     }
 }
 
