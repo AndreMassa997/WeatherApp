@@ -88,6 +88,7 @@ final class MainCarouselItem: UICollectionViewCell, Reusable{
             stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
         ])
     }
+
     
     func configure(viewModel: MainCarouselItemViewModel){
         self.viewModel = viewModel
@@ -95,6 +96,5 @@ final class MainCarouselItem: UICollectionViewCell, Reusable{
         self.currentWeather.text = viewModel.data.currentWeather?.current.condition.text
         self.currentTemperature.text = viewModel.temperatureString
         self.lastUpdatedLabel.text = viewModel.lastUpdateString
-        self.backgroundColor = viewModel.backgroundColor
     }
 }

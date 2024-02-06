@@ -38,7 +38,7 @@ class MainViewController: MVVMViewController<MainViewModel> {
     
     override func bindProperties() {
         super.bindProperties()
-        viewModel.$weatherForCity
+        viewModel.$currentPage
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] _ in
                 self?.updateView()
@@ -67,6 +67,8 @@ class MainViewController: MVVMViewController<MainViewModel> {
     
     private func updateView(){
         pageControl.numberOfPages = viewModel.weatherForCity.count
+        pageControl.currentPage = viewModel.currentPage
+        self.view.backgroundColor = viewModel.backgroundColor
     }
 }
 

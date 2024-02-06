@@ -6,19 +6,32 @@
 //
 
 import Combine
+import UIKit
 
 class MainViewModel: MVVMViewModel {
     
-    @Published var weatherForCity: [WeatherForCity] = []
-    @Published var currentPage: Int = 0
+    @Published private(set) var weatherForCity: [WeatherForCity] = []
+    @Published private(set) var currentPage: Int = 0
+    
+    var backgroundColor: UIColor?{
+        guard !weatherForCity.isEmpty, let currentWeather = weatherForCity[currentPage].currentWeather else {
+            return nil
+        }
+        return currentWeather.current.condition.code.getSkyColor(isDay: currentWeather.current._isDay)
+    }
     
     private var cities: [String] = []
+    
+    func updateCurrentPage(_ page: Int?){
+        guard let page else { return }
+        self.currentPage = page
+    }
     
     func getFirstTimeCity(){
         if let savedCities = AppPreferences.shared.savedCities{
             cities = savedCities
         }else{
-            cities = ["London"]
+            cities = ["London", "Paris", "Turin"]
         }
         
         Task{
