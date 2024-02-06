@@ -14,7 +14,7 @@ class MainViewModel: MVVMViewModel {
     @Published private(set) var currentPage: Int = 0
     
     var backgroundColor: UIColor?{
-        guard !weatherForCity.isEmpty, let currentWeather = weatherForCity[currentPage].currentWeather else {
+        guard weatherForCity.indices.contains(currentPage), let currentWeather = weatherForCity[currentPage].currentWeather else {
             return nil
         }
         return currentWeather.current.condition.code.getSkyColor(isDay: currentWeather.current._isDay)
@@ -34,14 +34,25 @@ class MainViewModel: MVVMViewModel {
             cities = ["London", "Paris", "Turin"]
         }
         
+        self.reload()
+    }
+    
+    func reloadAll(){
+        self.reload()
+    }
+    
+    private func reload(){
         Task{
+            var tmpWeather: [WeatherForCity] = []
             for city in cities {
                 async let weather = self.dataProvider.getCurrentWeather(from: city)
                 if let icon = await weather.weather?.current.condition.icon{
                     async let image = self.dataProvider.getImage(by: icon).image
-                    await self.weatherForCity.append(WeatherForCity(currentWeather: weather.weather, error: weather.error, city: city, image: image))
+                    await tmpWeather.append(WeatherForCity(currentWeather: weather.weather, error: weather.error, city: city, image: image))
+                    self.weatherForCity = tmpWeather
                 }else{
-                    await self.weatherForCity.append(WeatherForCity(currentWeather: weather.weather, error: weather.error, city: city))
+                    await tmpWeather.append(WeatherForCity(currentWeather: weather.weather, error: weather.error, city: city))
+                    self.weatherForCity = tmpWeather
                 }
             }
         }

@@ -95,6 +95,23 @@ final class MainCarouselItem: UICollectionViewCell, Reusable{
         self.mainName.text = viewModel.data.currentWeather?.location.name.capitalized
         self.currentWeather.text = viewModel.data.currentWeather?.current.condition.text
         self.currentTemperature.text = viewModel.temperatureString
-        self.lastUpdatedLabel.text = viewModel.lastUpdateString
+        animateLastUpdatedLabel(text: viewModel.lastUpdateString)
+    }
+    
+    private func animateLastUpdatedLabel(text: String?){
+        lastUpdatedLabel.text = text
+        
+        let positionAnimation = CABasicAnimation(keyPath: "position.y")
+        positionAnimation.fromValue = -lastUpdatedLabel.frame.height
+        positionAnimation.toValue = 0
+        positionAnimation.duration = 1.0
+        
+        lastUpdatedLabel.layer.add(positionAnimation, forKey: "move")
+
+        // Rimuovi la label dopo l'animazione
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            self.lastUpdatedLabel.text = ""
+        }
+        
     }
 }

@@ -20,6 +20,7 @@ class MainCarouselView: UICollectionView {
         self.dataSource = self
         self.backgroundColor = .clear
         self.showsHorizontalScrollIndicator = false
+        self.alwaysBounceVertical = true
         isPagingEnabled = true
         self.bindProperties()
     }
@@ -34,6 +35,10 @@ class MainCarouselView: UICollectionView {
                 self?.reloadData()
             })
             .store(in: &viewModel.anyCancellables)
+    }
+    
+    func scrollToItem(at index: Int){
+        self.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: false)
     }
 }
 

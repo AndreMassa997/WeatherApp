@@ -10,6 +10,13 @@ import Combine
 
 class MainViewController: MVVMViewController<MainViewModel> {
     
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = .red
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        return refreshControl
+    }()
+    
     private lazy var carousel: MainCarouselView = {
         let carousel = MainCarouselView(viewModel: self.viewModel)
         carousel.translatesAutoresizingMaskIntoConstraints = false
@@ -50,6 +57,7 @@ class MainViewController: MVVMViewController<MainViewModel> {
         self.view.addSubview(carousel)
         self.view.addSubview(pageControl)
         self.view.backgroundColor = AppPreferences.shared.palette.barBackgroundColor
+        self.carousel.refreshControl = refreshControl
     }
     
     private func setupConstraints(){
@@ -69,6 +77,13 @@ class MainViewController: MVVMViewController<MainViewModel> {
         pageControl.numberOfPages = viewModel.weatherForCity.count
         pageControl.currentPage = viewModel.currentPage
         self.view.backgroundColor = viewModel.backgroundColor
+    }
+    
+    @objc private func handleRefresh(){
+        self.carousel.refreshControl?.beginRefreshing()
+        viewModel.reloadAll()
+        self.carousel.refreshControl?.endRefreshing()
+        self.carousel.scrollToItem(at: viewModel.currentPage)
     }
 }
 
