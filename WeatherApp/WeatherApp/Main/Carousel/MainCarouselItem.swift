@@ -1,48 +1,16 @@
 //
-//  MainCarouselView.swift
+//  MainCarouselItem.swift
 //  WeatherApp
 //
-//  Created by Andrea Massari on 30/01/24.
+//  Created by Andrea Massari on 06/02/24.
 //
 
 import UIKit
 
-class MainCarouselView: UICollectionView {
-    var data: [WeatherForCity]?{
-        didSet{
-            self.reloadData()
-        }
-    }
+final class MainCarouselItem: UICollectionViewCell, Reusable{
     
-    convenience init(){
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        self.init(frame: .zero, collectionViewLayout: layout)
-        self.register(cellType: MainCarouselItem.self)
-        self.delegate = self
-        self.dataSource = self
-        isPagingEnabled = true
-    }
-}
-
-extension MainCarouselView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        data?.count ?? 0
-    }
+    private var viewModel: MainCarouselItemViewModel?
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let data = self.data?[indexPath.row] else { return UICollectionViewCell() }
-        let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: MainCarouselItem.self)
-        cell.configure(data: data)
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
-    }
-}
-
-class MainCarouselItem: UICollectionViewCell, Reusable{
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -121,11 +89,12 @@ class MainCarouselItem: UICollectionViewCell, Reusable{
         ])
     }
     
-    func configure(data: WeatherForCity){
-        self.mainName.text = data.currentWeather?.location.name.capitalized
-        self.currentWeather.text = data.currentWeather?.current.condition.text
-        self.currentTemperature.text = data.temperatureString
-        self.lastUpdatedLabel.text = data.lastUpdateString
-        self.backgroundColor = data.backgroundColor
+    func configure(viewModel: MainCarouselItemViewModel){
+        self.viewModel = viewModel
+        self.mainName.text = viewModel.data.currentWeather?.location.name.capitalized
+        self.currentWeather.text = viewModel.data.currentWeather?.current.condition.text
+        self.currentTemperature.text = viewModel.temperatureString
+        self.lastUpdatedLabel.text = viewModel.lastUpdateString
+        self.backgroundColor = viewModel.backgroundColor
     }
 }

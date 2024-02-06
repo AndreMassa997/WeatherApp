@@ -8,7 +8,7 @@
 import UIKit
 
 class MVVMViewController<ViewModel: MVVMViewModel>: UIViewController{
-    var viewModel: ViewModel
+    let viewModel: ViewModel
     
     var isNavigationBarHidden: Bool { get { return true }}
     

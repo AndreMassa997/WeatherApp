@@ -9,30 +9,6 @@
 
 import UIKit
 
-struct WeatherForCity{
-    let currentWeather: CurrentWeather?
-    let error: ErrorData?
-    let city: String
-    var image: UIImage?
-    
-    var temperatureString: String?{
-        guard let temperature = currentWeather?.current.tempC else { return nil }
-        return String(format: "%.0f °C", temperature)
-    }
-    
-    var lastUpdateString: String?{
-        guard let lastUpdate = currentWeather?.current.lastUpdatedEpoch else { return nil }
-        return "MAIN.APP.LAST_UPDATE".localized + Date(timeIntervalSince1970: lastUpdate).format(format: "HH:mm")
-    }
-    
-    var backgroundColor: UIColor?{
-        guard let currentWeather = currentWeather else {
-            return nil
-        }
-        return currentWeather.current.condition.code.getSkyColor(isDay: currentWeather.current._isDay)
-    }
-}
-
 struct CurrentWeather: MVVMModel{
     let location: Location
     let current: Current

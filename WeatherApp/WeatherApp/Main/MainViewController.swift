@@ -11,7 +11,7 @@ import Combine
 class MainViewController: MVVMViewController<MainViewModel> {
     
     private lazy var carousel: MainCarouselView = {
-        let carousel = MainCarouselView()
+        let carousel = MainCarouselView(viewModel: self.viewModel)
         carousel.translatesAutoresizingMaskIntoConstraints = false
         return carousel
     }()
@@ -67,7 +67,6 @@ class MainViewController: MVVMViewController<MainViewModel> {
     
     private func updateView(){
         pageControl.numberOfPages = viewModel.weatherForCity.count
-        carousel.data = viewModel.weatherForCity
     }
 }
 
