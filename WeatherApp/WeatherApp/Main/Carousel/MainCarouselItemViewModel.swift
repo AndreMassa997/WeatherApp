@@ -26,4 +26,18 @@ class MainCarouselItemViewModel: MVVMViewModel{
         guard let lastUpdate = data.currentWeather?.current.lastUpdatedEpoch else { return nil }
         return "MAIN.APP.LAST_UPDATE".localized + Date(timeIntervalSince1970: lastUpdate).format(format: "HH:mm")
     }
+    
+    var mainNameString: String{
+        guard let name = data.currentWeather?.location.name else {
+            return data.city.capitalized
+        }
+        return name.capitalized
+    }
+    
+    var currentWeatherCondition: String?{
+        guard let currentWeather = data.currentWeather?.current.condition.text else {
+            return data.error?.description
+        }
+        return currentWeather
+    }
 }

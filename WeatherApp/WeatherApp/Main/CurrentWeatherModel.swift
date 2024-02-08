@@ -9,9 +9,10 @@
 
 import UIKit
 
-struct CurrentWeather: MVVMModel{
+struct WeatherModel: MVVMModel{
     let location: Location
     let current: Current
+    let forecast: Forecast
 }
 
 struct Location: MVVMModel{
@@ -31,6 +32,28 @@ struct Current: MVVMModel{
     var _isDay: Bool{
         return isDay == 1
     }
+}
+
+struct Forecast: MVVMModel{
+    let forecastDay: [ForecastDay]
+}
+        
+struct ForecastDay: MVVMModel{
+    let date: String
+    let day: Day
+    let hour: [Hour]
+}
+
+struct Day: MVVMModel{
+    let condition: Condition
+    let maxTempC: Double
+    let minTempC: Double
+}
+
+struct Hour: MVVMModel{
+    let time: String
+    let tempC: Double
+    let condition: Condition
 }
 
 struct Condition: MVVMModel{

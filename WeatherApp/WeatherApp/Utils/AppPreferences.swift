@@ -28,6 +28,10 @@ class AppPreferences{
         }
     }
     
+    var numberOfDays: Int{
+        return 5
+    }
+    
     private func saveUserPreferences(name: String, value: Any){
         UserDefaults.standard.set(value, forKey: name)
     }

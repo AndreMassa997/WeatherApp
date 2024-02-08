@@ -9,23 +9,24 @@ import Foundation
 import UIKit
 
 protocol NetworkManagerProvider{
-    func getCurrentWeather(from location: String) async -> (weather: CurrentWeather?, error: ErrorData?)
+    func getForecastWeather(from location: String, for days: Int) async -> (weather: WeatherModel?, error: ErrorData?)
     func getImage(by url: String) async -> (image: UIImage?, error: ErrorData?)
 }
 
 class NetworkManager: NetworkManagerProvider{
-    func getCurrentWeather(from location: String) async -> (weather: CurrentWeather?, error: ErrorData?) {
-        return await webCall(with: "current.json", params: [("q", location)])
+    func getForecastWeather(from location: String, for days: Int) async -> (weather: WeatherModel?, error: ErrorData?) {
+        return await webCall(with: "forecast.json", params: [("q", location), ("days", days)])
     }
     
-    private func webCall<T: MVVMModel>(with url: String, params: [(String, String)]? = nil, decodingOptions: JSONDecoder.KeyDecodingStrategy = .convertFromSnakeCase) async -> (T?, ErrorData?){
+    private func webCall<T: MVVMModel>(with url: String, params: [(String, Any)]? = nil, decodingOptions: JSONDecoder.KeyDecodingStrategy = .convertFromSnakeCase) async -> (T?, ErrorData?){
         let key = "bf4eea9fe44d4ccb96f81437243001"
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.weatherapi.com"
         urlComponents.path = "/v1/\(url)"
         urlComponents.queryItems = params?.compactMap {
-            URLQueryItem(name: $0.0, value: $0.1)
+            let value = String(describing: $0.1)
+            return URLQueryItem(name: $0.0, value: value)
         }
         urlComponents.queryItems?.append(URLQueryItem(name: "key", value: key))
         guard let url = urlComponents.url else {
@@ -83,4 +84,15 @@ enum ErrorData: Error{
     case invalidURL
     case invalidData
     case decodingError
+    
+    var description: String{
+        switch self {
+        case .invalidURL:
+            return "Invalid URL"
+        case .invalidData:
+            return "Invalid Data received"
+        case .decodingError:
+            return "Decoding Error with data"
+        }
+    }
 }

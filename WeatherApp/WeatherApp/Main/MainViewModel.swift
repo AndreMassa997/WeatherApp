@@ -15,7 +15,7 @@ class MainViewModel: MVVMViewModel {
     
     var backgroundColor: UIColor?{
         guard weatherForCity.indices.contains(currentPage), let currentWeather = weatherForCity[currentPage].currentWeather else {
-            return nil
+            return .lightGray
         }
         return currentWeather.current.condition.code.getSkyColor(isDay: currentWeather.current._isDay)
     }
@@ -31,7 +31,7 @@ class MainViewModel: MVVMViewModel {
         if let savedCities = AppPreferences.shared.savedCities{
             cities = savedCities
         }else{
-            cities = ["London", "Paris", "Turin"]
+            cities = ["London", "Paris", "Berlin"]
         }
         
         self.reload()
@@ -45,7 +45,7 @@ class MainViewModel: MVVMViewModel {
         Task{
             var tmpWeather: [WeatherForCity] = []
             for city in cities {
-                async let weather = self.dataProvider.getCurrentWeather(from: city)
+                async let weather = self.dataProvider.getForecastWeather(from: city, for: AppPreferences.shared.numberOfDays)
                 if let icon = await weather.weather?.current.condition.icon{
                     async let image = self.dataProvider.getImage(by: icon).image
                     await tmpWeather.append(WeatherForCity(currentWeather: weather.weather, error: weather.error, city: city, image: image))

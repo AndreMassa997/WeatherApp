@@ -92,8 +92,8 @@ final class MainCarouselItem: UICollectionViewCell, Reusable{
     
     func configure(viewModel: MainCarouselItemViewModel){
         self.viewModel = viewModel
-        self.mainName.text = viewModel.data.currentWeather?.location.name.capitalized
-        self.currentWeather.text = viewModel.data.currentWeather?.current.condition.text
+        self.mainName.text = viewModel.mainNameString
+        self.currentWeather.text = viewModel.currentWeatherCondition
         self.currentTemperature.text = viewModel.temperatureString
         animateLastUpdatedLabel(text: viewModel.lastUpdateString)
     }

@@ -8,7 +8,7 @@
 import UIKit
 
 struct WeatherForCity{
-    let currentWeather: CurrentWeather?
+    let currentWeather: WeatherModel?
     let error: ErrorData?
     let city: String
     var image: UIImage?
