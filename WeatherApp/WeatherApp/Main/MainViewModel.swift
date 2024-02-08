@@ -46,14 +46,8 @@ class MainViewModel: MVVMViewModel {
             var tmpWeather: [WeatherForCity] = []
             for city in cities {
                 async let weather = self.dataProvider.getForecastWeather(from: city, for: AppPreferences.shared.numberOfDays)
-                if let icon = await weather.weather?.current.condition.icon{
-                    async let image = self.dataProvider.getImage(by: icon).image
-                    await tmpWeather.append(WeatherForCity(currentWeather: weather.weather, error: weather.error, city: city, image: image))
-                    self.weatherForCity = tmpWeather
-                }else{
-                    await tmpWeather.append(WeatherForCity(currentWeather: weather.weather, error: weather.error, city: city))
-                    self.weatherForCity = tmpWeather
-                }
+                await tmpWeather.append(WeatherForCity(currentWeather: weather.weather, error: weather.error, city: city))
+                self.weatherForCity = tmpWeather
             }
         }
     }

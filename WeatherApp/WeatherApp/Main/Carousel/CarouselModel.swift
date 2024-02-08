@@ -11,5 +11,4 @@ struct WeatherForCity{
     let currentWeather: WeatherModel?
     let error: ErrorData?
     let city: String
-    var image: UIImage?
 }
