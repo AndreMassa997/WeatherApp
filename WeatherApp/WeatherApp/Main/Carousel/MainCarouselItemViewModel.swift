@@ -17,9 +17,12 @@ class MainCarouselItemViewModel: MVVMViewModel{
         super.init(dataProvider: dataProvider)
     }
     
-    var temperatureString: String?{
-        guard let temperature = data.currentWeather?.current.tempC else { return nil }
-        return String(format: "%.0f °C", temperature)
+    var temperatureString: NSAttributedString?{
+        guard let temperature = data.currentWeather?.current.tempC else { return nil
+        }
+        let mutableAttributed = NSMutableAttributedString(string: String(format: "%.0f", temperature), attributes: [.font: UIFont.systemFont(ofSize: 52, weight: .light)])
+        mutableAttributed.append(NSAttributedString(string: " °C", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .light)]))
+        return mutableAttributed
     }
     
     var lastUpdateString: String?{
@@ -39,5 +42,10 @@ class MainCarouselItemViewModel: MVVMViewModel{
             return data.error?.description
         }
         return currentWeather
+    }
+    
+    var minMaxTemperature: String?{
+        guard let minTemperature = data.currentWeather?.forecast.forecastday.first?.day.mintempC, let maxTemperature = data.currentWeather?.forecast.forecastday.first?.day.maxtempC else { return nil }
+        return String(format: "%.0f / %.0f °C", minTemperature, maxTemperature)
     }
 }

@@ -40,7 +40,6 @@ final class MainCarouselItem: UICollectionViewCell, Reusable{
     
     private lazy var currentTemperature: UILabel = {
         let lbl = UILabel()
-        lbl.font = UIFont.systemFont(ofSize: 48, weight: .light)
         return lbl
     }()
     
@@ -70,6 +69,7 @@ final class MainCarouselItem: UICollectionViewCell, Reusable{
         stackView.addArrangedSubview(lastUpdatedLabel)
         stackView.addArrangedSubview(mainName)
         stackView.addArrangedSubview(currentTemperature)
+        stackView.addArrangedSubview(minMaxTemperature)
         stackView.addArrangedSubview(currentWeather)
         scrollView.addSubview(stackView)
         self.contentView.addSubview(scrollView)
@@ -94,7 +94,8 @@ final class MainCarouselItem: UICollectionViewCell, Reusable{
         self.viewModel = viewModel
         self.mainName.text = viewModel.mainNameString
         self.currentWeather.text = viewModel.currentWeatherCondition
-        self.currentTemperature.text = viewModel.temperatureString
+        self.currentTemperature.attributedText = viewModel.temperatureString
+        self.minMaxTemperature.text = viewModel.minMaxTemperature
         animateLastUpdatedLabel(text: viewModel.lastUpdateString)
     }
     
