@@ -35,7 +35,7 @@ struct Current: MVVMModel{
 }
 
 struct Forecast: MVVMModel{
-    let forecastDay: [ForecastDay]
+    let forecastday: [ForecastDay]
 }
         
 struct ForecastDay: MVVMModel{
@@ -46,8 +46,8 @@ struct ForecastDay: MVVMModel{
 
 struct Day: MVVMModel{
     let condition: Condition
-    let maxTempC: Double
-    let minTempC: Double
+    let maxtempC: Double
+    let mintempC: Double
 }
 
 struct Hour: MVVMModel{
