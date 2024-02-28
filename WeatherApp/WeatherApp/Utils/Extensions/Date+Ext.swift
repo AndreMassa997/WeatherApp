@@ -15,4 +15,8 @@ extension Date{
         return dateFormatter.string(from: self)
     }
     
+    var hour: Int{
+        return Calendar.current.component(.hour, from: self)
+    }
+    
 }

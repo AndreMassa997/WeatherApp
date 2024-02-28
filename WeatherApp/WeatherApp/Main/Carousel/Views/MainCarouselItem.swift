@@ -8,13 +8,17 @@
 import UIKit
 
 final class MainCarouselItem: UICollectionViewCell, Reusable{
-    
     private var viewModel: MainCarouselItemViewModel?
     
     private lazy var scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        return scrollView
+        let sv = UIScrollView()
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        return sv
+    }()
+    private lazy var forecastHoursCarousel: ForecastHourCarouselView = {
+        let carousel = ForecastHourCarouselView()
+        carousel.translatesAutoresizingMaskIntoConstraints = false
+        return carousel
     }()
     
     private lazy var stackView: UIStackView = {
@@ -54,7 +58,7 @@ final class MainCarouselItem: UICollectionViewCell, Reusable{
         lbl.font = UIFont.systemFont(ofSize: 22, weight: .medium)
         return lbl
     }()
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubviews()
@@ -72,6 +76,7 @@ final class MainCarouselItem: UICollectionViewCell, Reusable{
         stackView.addArrangedSubview(minMaxTemperature)
         stackView.addArrangedSubview(currentWeather)
         scrollView.addSubview(stackView)
+        scrollView.addSubview(forecastHoursCarousel)
         self.contentView.addSubview(scrollView)
     }
     
@@ -82,10 +87,14 @@ final class MainCarouselItem: UICollectionViewCell, Reusable{
             scrollView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             scrollView.topAnchor.constraint(equalTo: contentView.topAnchor),
             
-            stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            stackView.leftAnchor.constraint(greaterThanOrEqualTo: scrollView.leftAnchor, constant: 15),
-            stackView.rightAnchor.constraint(lessThanOrEqualTo: scrollView.rightAnchor, constant: -15),
+            stackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 15),
+            stackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -15),
             stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            
+            forecastHoursCarousel.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 40),
+            forecastHoursCarousel.leftAnchor.constraint(greaterThanOrEqualTo: contentView.leftAnchor, constant: 15),
+            forecastHoursCarousel.rightAnchor.constraint(lessThanOrEqualTo: contentView.rightAnchor, constant: -15),
+            forecastHoursCarousel.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
 
@@ -96,23 +105,25 @@ final class MainCarouselItem: UICollectionViewCell, Reusable{
         self.currentWeather.text = viewModel.currentWeatherCondition
         self.currentTemperature.attributedText = viewModel.temperatureString
         self.minMaxTemperature.text = viewModel.minMaxTemperature
+        
+        let dailyForecastViewModel = ForecastHoursViewModel(hours: viewModel.hourCarouselData, dataProvider: viewModel.dataProvider)
+        self.forecastHoursCarousel.configure(viewModel: dailyForecastViewModel)
+        
         animateLastUpdatedLabel(text: viewModel.lastUpdateString)
     }
     
     private func animateLastUpdatedLabel(text: String?){
-        lastUpdatedLabel.text = text
-        
         let positionAnimation = CABasicAnimation(keyPath: "position.y")
         positionAnimation.fromValue = -lastUpdatedLabel.frame.height
         positionAnimation.toValue = 0
-        positionAnimation.duration = 1.0
+        positionAnimation.duration = 0.5
         
-        lastUpdatedLabel.layer.add(positionAnimation, forKey: "move")
-
+        self.lastUpdatedLabel.text = text
+        self.lastUpdatedLabel.layer.add(positionAnimation, forKey: "move")
+    
         // Rimuovi la label dopo l'animazione
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             self.lastUpdatedLabel.text = ""
         }
-        
     }
 }

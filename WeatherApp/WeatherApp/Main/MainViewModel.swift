@@ -44,11 +44,18 @@ class MainViewModel: MVVMViewModel {
     private func reload(){
         Task{
             var tmpWeather: [WeatherForCity] = []
-            for city in cities {
-                async let weather = self.dataProvider.getForecastWeather(from: city, for: AppPreferences.shared.numberOfDays)
-                await tmpWeather.append(WeatherForCity(currentWeather: weather.weather, error: weather.error, city: city))
+            for city in self.cities {
+                async let weather = self.getForecast(for: city)
+                //Make web call
+                await tmpWeather.append(WeatherForCity(currentWeather: weather.result, error: weather.error, city: city))
+                //Assign variable to change the UI
                 self.weatherForCity = tmpWeather
             }
         }
+    }
+    
+    private func getForecast(for city: String, days: Int = AppPreferences.shared.numberOfDays) async -> (result: WeatherModel?, error: ErrorData?){
+        let request = ForecastWeatherAPI(requestParams: ForecastWeatherInput(location: city, days: days))
+        return await self.dataProvider.fetchData(with: request)
     }
 }

@@ -8,11 +8,11 @@
 import Combine
 import UIKit
 
-class MainCarouselItemViewModel: MVVMViewModel{
+final class MainCarouselItemViewModel: MVVMViewModel{
     
-    let data: WeatherForCity
+    private let data: WeatherForCity
         
-    init(data: WeatherForCity, dataProvider: NetworkManagerProvider){
+    init(data: WeatherForCity, dataProvider: NetworkProvider){
         self.data = data
         super.init(dataProvider: dataProvider)
     }
@@ -47,5 +47,9 @@ class MainCarouselItemViewModel: MVVMViewModel{
     var minMaxTemperature: String?{
         guard let minTemperature = data.currentWeather?.forecast.forecastday.first?.day.mintempC, let maxTemperature = data.currentWeather?.forecast.forecastday.first?.day.maxtempC else { return nil }
         return String(format: "%.0f / %.0f °C", minTemperature, maxTemperature)
+    }
+    
+    var hourCarouselData: [Hour]?{
+        data.currentWeather?.forecast.forecastday.first?.hour
     }
 }

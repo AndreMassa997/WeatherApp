@@ -8,16 +8,13 @@
 import Combine
 
 class MVVMViewModel: ObservableObject {
+    let dataProvider: NetworkProvider
     
-    let dataProvider: NetworkManagerProvider
-    
-    init(dataProvider: NetworkManagerProvider){
+    init(dataProvider: NetworkProvider){
         self.dataProvider = dataProvider
     }
     
-    func bindProperties(){
-        
-    }
+    func bindProperties(){}
     
     var anyCancellables: Set<AnyCancellable> = Set()
 }
