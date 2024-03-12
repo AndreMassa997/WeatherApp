@@ -52,4 +52,8 @@ final class MainCarouselItemViewModel: MVVMViewModel{
     var hourCarouselData: [Hour]?{
         data.currentWeather?.forecast.forecastday.first?.hour
     }
+    
+    var daysCarouselData: [ForecastDay]?{
+        data.currentWeather?.forecast.forecastday
+    }
 }

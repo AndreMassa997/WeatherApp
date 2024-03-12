@@ -12,7 +12,7 @@ extension String{
         return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
     }
     
-    func toDate(from format: String = "yyyy-MM-dd HH:mm") -> Date?{
+    func toDate(with format: String = "yyyy-MM-dd HH:mm") -> Date?{
         let df = DateFormatter()
         df.dateFormat = format
         return df.date(from: self)

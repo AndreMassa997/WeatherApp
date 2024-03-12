@@ -21,6 +21,12 @@ final class MainCarouselItem: UICollectionViewCell, Reusable{
         return carousel
     }()
     
+    private let forecastDaysCarousel: ForecastDaysCarouselView = {
+        let carousel = ForecastDaysCarouselView()
+        carousel.translatesAutoresizingMaskIntoConstraints = false
+        return carousel
+    }()
+    
     private lazy var stackView: UIStackView = {
         let sv = UIStackView()
         sv.axis = .vertical
@@ -77,6 +83,7 @@ final class MainCarouselItem: UICollectionViewCell, Reusable{
         stackView.addArrangedSubview(currentWeather)
         scrollView.addSubview(stackView)
         scrollView.addSubview(forecastHoursCarousel)
+        scrollView.addSubview(forecastDaysCarousel)
         self.contentView.addSubview(scrollView)
     }
     
@@ -94,7 +101,12 @@ final class MainCarouselItem: UICollectionViewCell, Reusable{
             forecastHoursCarousel.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 40),
             forecastHoursCarousel.leftAnchor.constraint(greaterThanOrEqualTo: contentView.leftAnchor, constant: 15),
             forecastHoursCarousel.rightAnchor.constraint(lessThanOrEqualTo: contentView.rightAnchor, constant: -15),
-            forecastHoursCarousel.heightAnchor.constraint(equalToConstant: 80)
+            forecastHoursCarousel.heightAnchor.constraint(equalToConstant: 80),
+            
+            forecastDaysCarousel.topAnchor.constraint(equalTo: forecastHoursCarousel.bottomAnchor, constant: 30),
+            forecastDaysCarousel.leftAnchor.constraint(greaterThanOrEqualTo: contentView.leftAnchor, constant: 15),
+            forecastDaysCarousel.rightAnchor.constraint(lessThanOrEqualTo: contentView.rightAnchor, constant: -15),
+            forecastDaysCarousel.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
 
@@ -106,8 +118,11 @@ final class MainCarouselItem: UICollectionViewCell, Reusable{
         self.currentTemperature.attributedText = viewModel.temperatureString
         self.minMaxTemperature.text = viewModel.minMaxTemperature
         
-        let dailyForecastViewModel = ForecastHoursViewModel(hours: viewModel.hourCarouselData, dataProvider: viewModel.dataProvider)
-        self.forecastHoursCarousel.configure(viewModel: dailyForecastViewModel)
+        let todayForecastViewModel = ForecastHoursViewModel(hours: viewModel.hourCarouselData, dataProvider: viewModel.dataProvider)
+        self.forecastHoursCarousel.configure(viewModel: todayForecastViewModel)
+        
+        let dailyForecastViewModel = ForecastDaysViewModel(days: viewModel.daysCarouselData, dataProvider: viewModel.dataProvider)
+        self.forecastDaysCarousel.configure(viewModel: dailyForecastViewModel)
         
         animateLastUpdatedLabel(text: viewModel.lastUpdateString)
     }

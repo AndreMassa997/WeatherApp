@@ -8,3 +8,5 @@
 
 "MAIN.APP.TITLE" = "Weather";
 "MAIN.APP.LAST_UPDATE" = "Last update at ";
+"MAIN.APP.TODAY" = "Today";
+"MAIN.APP.TOMORROW" = "Tomorrow";
