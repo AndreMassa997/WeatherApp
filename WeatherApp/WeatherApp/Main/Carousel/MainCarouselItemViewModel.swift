@@ -32,7 +32,7 @@ final class MainCarouselItemViewModel: MVVMViewModel{
     
     var mainNameString: String{
         guard let name = data.currentWeather?.location.name else {
-            return data.city.capitalized
+            return data.city.name.capitalized
         }
         return name.capitalized
     }

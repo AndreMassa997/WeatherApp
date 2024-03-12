@@ -17,16 +17,7 @@ class AppPreferences{
         }
     }
     
-    var savedCities: [String]?{
-        set{
-            guard let citiesToSave = newValue?.joined(separator: "|") else { return }
-            saveUserPreferences(name: "cities", value: citiesToSave)
-        }
-        get{
-            guard let joinedCity = getUserPreferences(name: "cities") as? String else { return nil }
-            return joinedCity.components(separatedBy: "|")
-        }
-    }
+    @CodableUserDefault(key: "savedCities") var savedCities: [Location]?
     
     var numberOfDays: Int{
         return 5
@@ -38,5 +29,26 @@ class AppPreferences{
     
     private func getUserPreferences(name: String) -> Any?{
         UserDefaults.standard.object(forKey: name)
+    }
+}
+
+@propertyWrapper
+struct CodableUserDefault<Value: Codable>{
+    let key: String
+    
+    var wrappedValue: Value?{
+        get{
+            guard 
+                let data = UserDefaults.standard.object(forKey: key) as? Data,
+                let decodedValue = try? JSONDecoder().decode(Value.self, from: data) else {
+                return nil
+            }
+            return decodedValue
+        }
+        set{
+            if let encoded = try? JSONEncoder().encode(newValue){
+                UserDefaults.standard.set(encoded, forKey: key)
+            }
+        }
     }
 }

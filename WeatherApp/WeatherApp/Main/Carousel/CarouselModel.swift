@@ -10,5 +10,5 @@ import UIKit
 struct WeatherForCity{
     let currentWeather: WeatherModel?
     let error: ErrorData?
-    let city: String
+    let city: Location
 }

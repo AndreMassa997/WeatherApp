@@ -13,6 +13,15 @@ class MainViewModel: MVVMViewModel {
     @Published private(set) var weatherForCity: [WeatherForCity] = []
     @Published private(set) var currentPage: Int = 0
     
+    private var cities: [Location] = []
+    private lazy var getNoDataSavedLocation: [Location] = {
+        return [
+            Location(name: "London", region: "City of London, Greater London", country: "United Kingdom", lat: 51.52, lon: -0.11),
+            Location(name: "Paris", region: "Ile-de-France", country: "France", lat: 33.66, lon: -95.56),
+            Location(name: "Berlin", region: "Berlin", country: "Germany", lat: 52.52, lon: 13.4),
+        ]
+    }()
+    
     var backgroundColor: UIColor?{
         guard weatherForCity.indices.contains(currentPage), let currentWeather = weatherForCity[currentPage].currentWeather else {
             return .lightGray
@@ -20,7 +29,6 @@ class MainViewModel: MVVMViewModel {
         return currentWeather.current.condition.code.getSkyColor(isDay: currentWeather.current._isDay)
     }
     
-    private var cities: [String] = []
     
     func updateCurrentPage(_ page: Int?){
         guard let page else { return }
@@ -31,7 +39,7 @@ class MainViewModel: MVVMViewModel {
         if let savedCities = AppPreferences.shared.savedCities{
             cities = savedCities
         }else{
-            cities = ["London", "Paris", "Berlin"]
+            cities = getNoDataSavedLocation
         }
         
         self.reload()
@@ -54,8 +62,9 @@ class MainViewModel: MVVMViewModel {
         }
     }
     
-    private func getForecast(for city: String, days: Int = AppPreferences.shared.numberOfDays) async -> (result: WeatherModel?, error: ErrorData?){
-        let request = ForecastWeatherAPI(requestParams: ForecastWeatherInput(location: city, days: days))
+    private func getForecast(for city: Location, days: Int = AppPreferences.shared.numberOfDays) async -> (result: WeatherModel?, error: ErrorData?){
+        let coordinates = "\(city.lat),\(city.lon)"
+        let request = ForecastWeatherAPI(requestParams: ForecastWeatherInput(location: coordinates, days: days))
         return await self.dataProvider.fetchData(with: request)
     }
 }
