@@ -10,18 +10,17 @@ import UIKit
 final class ForecastHourItemViewModel: MVVMViewModel{
     private let data: Hour
     @Published var image: UIImage?
-    private let imagesProvider: ImagesProvider
     
     init(hour: Hour, dataProvider: NetworkProvider, imagesProvider: ImagesProvider) {
         self.data = hour
-        self.imagesProvider = imagesProvider
         super.init(dataProvider: dataProvider)
+        self.imagesProvider = imagesProvider
         self.getImage()
     }
     
     private func getImage(){
         Task{
-            self.image = await imagesProvider.getImage(by: data.condition.icon).image
+            self.image = await imagesProvider?.getImage(by: data.condition.icon, cachedImage: true).image
         }
     }
     

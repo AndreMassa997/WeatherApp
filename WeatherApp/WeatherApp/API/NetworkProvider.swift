@@ -12,7 +12,7 @@ protocol NetworkProvider{
 }
 
 protocol ImagesProvider{
-    func getImage(by url: String) async -> (image: UIImage?, error: ErrorData?)
+    func getImage(by url: String, cachedImage: Bool) async -> (image: UIImage?, error: ErrorData?)
 }
 
 enum ErrorData: Error{

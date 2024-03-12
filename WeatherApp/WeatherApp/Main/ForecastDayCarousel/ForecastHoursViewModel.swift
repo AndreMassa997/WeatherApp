@@ -26,4 +26,8 @@ final class ForecastHoursViewModel: MVVMViewModel{
         })
     }
     
+    func hourForIndex(index: Int) -> Hour?{
+        dataSource[safe: index]
+    }
+    
 }

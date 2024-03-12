@@ -9,6 +9,7 @@ import Combine
 
 class MVVMViewModel: ObservableObject {
     let dataProvider: NetworkProvider
+    var imagesProvider: ImagesProvider?
     
     init(dataProvider: NetworkProvider){
         self.dataProvider = dataProvider

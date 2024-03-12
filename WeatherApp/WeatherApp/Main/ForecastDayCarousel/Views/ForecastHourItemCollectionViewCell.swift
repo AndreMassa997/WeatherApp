@@ -10,7 +10,7 @@ import UIKit
 class ForecastHourItemCollectionViewCell: UICollectionViewCell, Reusable {
     private var viewModel: ForecastHourItemViewModel?
     
-    private lazy var stackView: UIStackView = {
+    private let stackView: UIStackView = {
         let sv = UIStackView()
         sv.axis = .vertical
         sv.alignment = .center
@@ -19,19 +19,19 @@ class ForecastHourItemCollectionViewCell: UICollectionViewCell, Reusable {
         return sv
     }()
     
-    private lazy var hourLabel: UILabel = {
+    private let hourLabel: UILabel = {
         let lbl = UILabel()
         lbl.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         return lbl
     }()
     
-    private lazy var weatherIcon: UIImageView = {
+    private let weatherIcon: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
         return iv
     }()
     
-    private lazy var temperatureLabel: UILabel = {
+    private let temperatureLabel: UILabel = {
         let lbl = UILabel()
         lbl.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
         return lbl

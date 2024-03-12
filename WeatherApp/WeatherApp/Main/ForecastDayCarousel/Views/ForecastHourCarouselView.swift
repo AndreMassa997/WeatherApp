@@ -43,8 +43,7 @@ extension ForecastHourCarouselView: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let viewModel else { return UICollectionViewCell() }
-        let hour = viewModel.dataSource[indexPath.item]
+        guard let viewModel, let hour = viewModel.hourForIndex(index: indexPath.item) else { return UICollectionViewCell() }
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: ForecastHourItemCollectionViewCell.self)
         let forecasHourItemViewModel = ForecastHourItemViewModel(hour: hour, dataProvider: viewModel.dataProvider, imagesProvider: ImagesManager())
         cell.configure(viewModel: forecasHourItemViewModel)
