@@ -102,7 +102,7 @@ class MainViewController: MVVMViewController<MainViewModel> {
     }
     
     @objc private func settingsTapped(){
-        let settingsViewModel = SettingsViewModel(dataProvider: viewModel.dataProvider)
+        let settingsViewModel = SettingsViewModel(cities: viewModel.cities, dataProvider: viewModel.dataProvider)
         let settingsViewController = SettingsViewController(viewModel: settingsViewModel)
         self.navigationController?.pushViewController(settingsViewController, animated: true)
     }

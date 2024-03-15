@@ -9,4 +9,11 @@ import UIKit
 
 class SettingsViewModel: MVVMViewModel {
 
+    let cities: [Location]
+    
+    init(cities: [Location], dataProvider: NetworkProvider){
+        self.cities = cities
+        super.init(dataProvider: dataProvider)
+    }
+    
 }

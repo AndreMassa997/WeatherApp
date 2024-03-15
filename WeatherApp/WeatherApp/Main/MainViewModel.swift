@@ -13,7 +13,7 @@ class MainViewModel: MVVMViewModel {
     @Published private(set) var weatherForCity: [WeatherForCity] = []
     @Published private(set) var currentPage: Int = 0
     
-    private var cities: [Location] = []
+    var cities: [Location] = []
     private lazy var getNoDataSavedLocation: [Location] = {
         return [
             Location(name: "London", region: "City of London, Greater London", country: "United Kingdom", lat: 51.52, lon: -0.11),
@@ -40,6 +40,7 @@ class MainViewModel: MVVMViewModel {
             cities = savedCities
         }else{
             cities = getNoDataSavedLocation
+            AppPreferences.shared.savedCities = cities
         }
         
         self.reload()
