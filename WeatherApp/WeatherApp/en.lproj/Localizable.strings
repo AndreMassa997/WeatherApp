@@ -10,3 +10,6 @@
 "MAIN.APP.LAST_UPDATE" = "Last update at ";
 "MAIN.APP.TODAY" = "Today";
 "MAIN.APP.TOMORROW" = "Tomorrow";
+"SETTINGS" = "Settings";
+"SETTINGS.CITIES" = "Cities";
+"SETTINGS.TEMPERATURE_UDM" = "Temperature °C/°F";

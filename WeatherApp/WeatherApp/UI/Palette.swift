@@ -12,6 +12,7 @@ protocol Palette{
     var statusBarStyle: UIStatusBarStyle { get }
     var barTintColor: UIColor { get }
     var barBackgroundColor: UIColor { get }
+    var viewBackgroundColor: UIColor { get }
 }
 
 struct LightPalette: Palette{
@@ -31,7 +32,9 @@ struct LightPalette: Palette{
         .white
     }
     
-   
+    var viewBackgroundColor: UIColor{
+        .white
+    }
 }
 
 struct DarkPalette: Palette{
@@ -51,4 +54,7 @@ struct DarkPalette: Palette{
         .darkContent
     }
     
+    var viewBackgroundColor: UIColor{
+        .black
+    }
 }

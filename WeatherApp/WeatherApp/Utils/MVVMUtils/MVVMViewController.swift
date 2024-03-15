@@ -11,6 +11,14 @@ class MVVMViewController<ViewModel: MVVMViewModel>: UIViewController{
     let viewModel: ViewModel
     
     var isNavigationBarHidden: Bool { get { return true }}
+    var backgroundColor: UIColor {
+        get{
+            .palette.viewBackgroundColor
+        }
+        set{
+            self.view.backgroundColor = newValue
+        }
+    }
     
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
@@ -25,10 +33,11 @@ class MVVMViewController<ViewModel: MVVMViewModel>: UIViewController{
         super.viewDidLoad()
         setupNavigationBar()
         bindProperties()
+        self.view.backgroundColor = backgroundColor
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         self.navigationController?.isNavigationBarHidden = self.isNavigationBarHidden
     }
     

@@ -23,11 +23,11 @@ class MainViewController: MVVMViewController<MainViewModel> {
         return carousel
     }()
     
-    private lazy var addCityButton: UIButton = {
+    private lazy var settingsButton: UIButton = {
         let button = UIButton(type: .system)
         button.titleLabel?.text = nil
-        button.setImage(UIImage(systemName: "plus.app"), for: .normal)
-        button.addTarget(self, action: #selector(addCityTapped), for: .touchUpInside)
+        button.setImage(UIImage(systemName: "gear"), for: .normal)
+        button.addTarget(self, action: #selector(settingsTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -41,7 +41,7 @@ class MainViewController: MVVMViewController<MainViewModel> {
     }()
     
     override var isNavigationBarHidden: Bool{
-        return true
+        true
     }
 
     override func viewDidLoad() {
@@ -49,7 +49,7 @@ class MainViewController: MVVMViewController<MainViewModel> {
         // Do any additional setup after loading the view.
         setupView()
         setupConstraints()
-        viewModel.getFirstTimeCity()
+        viewModel.getFirstTimeCity()        
     }
     
     override func bindProperties() {
@@ -64,9 +64,8 @@ class MainViewController: MVVMViewController<MainViewModel> {
     
     private func setupView(){
         self.view.addSubview(carousel)
-        self.view.addSubview(addCityButton)
+        self.view.addSubview(settingsButton)
         self.view.addSubview(pageControl)
-        self.view.backgroundColor = AppPreferences.shared.palette.barBackgroundColor
         self.carousel.refreshControl = refreshControl
     }
     
@@ -76,10 +75,10 @@ class MainViewController: MVVMViewController<MainViewModel> {
             carousel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             carousel.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             carousel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            addCityButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
-            addCityButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -10),
-            addCityButton.widthAnchor.constraint(equalToConstant: 30),
-            addCityButton.heightAnchor.constraint(equalTo: addCityButton.widthAnchor),
+            settingsButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
+            settingsButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -10),
+            settingsButton.widthAnchor.constraint(equalToConstant: 30),
+            settingsButton.heightAnchor.constraint(equalTo: settingsButton.widthAnchor),
             pageControl.leftAnchor.constraint(equalTo: view.leftAnchor),
             pageControl.rightAnchor.constraint(equalTo: view.rightAnchor),
             pageControl.heightAnchor.constraint(equalToConstant: 25),
@@ -102,8 +101,10 @@ class MainViewController: MVVMViewController<MainViewModel> {
         self.carousel.scrollToItem(at: viewModel.currentPage)
     }
     
-    @objc private func addCityTapped(){
-        
+    @objc private func settingsTapped(){
+        let settingsViewModel = SettingsViewModel(dataProvider: viewModel.dataProvider)
+        let settingsViewController = SettingsViewController(viewModel: settingsViewModel)
+        self.navigationController?.pushViewController(settingsViewController, animated: true)
     }
 }
 
