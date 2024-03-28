@@ -7,7 +7,7 @@
 
 import Combine
 
-class SettingsViewModel: MVVMViewModel {
+class LocationsSettingsViewModel: MVVMViewModel {
 
     @Published private(set) var cities: [Location]
     

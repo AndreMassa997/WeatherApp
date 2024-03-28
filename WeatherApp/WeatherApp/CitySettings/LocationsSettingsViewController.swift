@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingsViewController: MVVMViewController<SettingsViewModel> {
+class LocationsSettingsViewController: MVVMViewController<LocationsSettingsViewModel> {
     override var isNavigationBarHidden: Bool{
         false
     }
@@ -53,49 +53,25 @@ class SettingsViewController: MVVMViewController<SettingsViewModel> {
     }
 }
 
-enum SettingsSections: Int, CaseIterable{
-    case cities
-    case temperature
-}
-
-extension SettingsViewController: UITableViewDelegate, UITableViewDataSource{
-    func numberOfSections(in tableView: UITableView) -> Int {
-        SettingsSections.allCases.count
-    }
-    
+extension LocationsSettingsViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let section = SettingsSections(rawValue: section)
-        switch section{
-        case .cities:
-            return viewModel.cities.count
-        case .temperature:
-            return 1
-        default:
-            return 0
-        }
+        return viewModel.cities.count
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let section = SettingsSections(rawValue: indexPath.section)
-        switch section{
-        case .cities:
-            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: CityTableViewCell.self)
-            let city = viewModel.cities[indexPath.row]
-            let isDeleteButtonVisibile = viewModel.cities.count > 1
-            let viewModel = CityViewModel(city: city, dataProvider: viewModel.dataProvider)
-            cell.configure(viewModel: viewModel, isDeleteButtonVisible: isDeleteButtonVisibile)
-            viewModel.deleteButtonTap
-                .receive(on: DispatchQueue.main)
-                .sink{ [weak self] in
-                    self?.askForDeleteCityConfirmation(city: viewModel.city)
-                }
-                .store(in: &viewModel.anyCancellables)
-            return cell
-        case .temperature:
-            return UITableViewCell()
-        default:
-            return UITableViewCell()
-        }
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: CityTableViewCell.self)
+        let city = viewModel.cities[indexPath.row]
+        let isDeleteButtonVisibile = viewModel.cities.count > 1
+        let viewModel = CityViewModel(city: city, dataProvider: viewModel.dataProvider)
+        cell.configure(viewModel: viewModel, isDeleteButtonVisible: isDeleteButtonVisibile)
+        viewModel.deleteButtonTap
+            .receive(on: DispatchQueue.main)
+            .sink{ [weak self] in
+                self?.askForDeleteCityConfirmation(city: viewModel.city)
+            }
+            .store(in: &viewModel.anyCancellables)
+        return cell
     }
     
     private func askForDeleteCityConfirmation(city: Location){

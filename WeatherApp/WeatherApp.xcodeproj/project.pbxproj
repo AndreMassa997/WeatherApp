@@ -15,8 +15,8 @@
 		3E5BB94C2BA06BED0075E959 /* ForecastDaysCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5BB94B2BA06BED0075E959 /* ForecastDaysCarouselView.swift */; };
 		3E5BB94F2BA06C5D0075E959 /* ForecastDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5BB94E2BA06C5D0075E959 /* ForecastDayCollectionViewCell.swift */; };
 		3E5BB9522BA06C920075E959 /* ForecastDayItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5BB9512BA06C920075E959 /* ForecastDayItemViewModel.swift */; };
-		3E5BB9552BA0958B0075E959 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5BB9542BA0958B0075E959 /* SettingsViewController.swift */; };
-		3E5BB9572BA095990075E959 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5BB9562BA095990075E959 /* SettingsViewModel.swift */; };
+		3E5BB9552BA0958B0075E959 /* LocationsSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5BB9542BA0958B0075E959 /* LocationsSettingsViewController.swift */; };
+		3E5BB9572BA095990075E959 /* LocationsSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5BB9562BA095990075E959 /* LocationsSettingsViewModel.swift */; };
 		3E63B38B2B74E0530043C90F /* ForecastHourItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E63B38A2B74E0530043C90F /* ForecastHourItemCollectionViewCell.swift */; };
 		3E63B38D2B74E0990043C90F /* ForecastHourCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E63B38C2B74E0990043C90F /* ForecastHourCarouselView.swift */; };
 		3E63B38F2B74E19C0043C90F /* ForecastHoursViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E63B38E2B74E19C0043C90F /* ForecastHoursViewModel.swift */; };
@@ -77,8 +77,8 @@
 		3E5BB94B2BA06BED0075E959 /* ForecastDaysCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDaysCarouselView.swift; sourceTree = "<group>"; };
 		3E5BB94E2BA06C5D0075E959 /* ForecastDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDayCollectionViewCell.swift; sourceTree = "<group>"; };
 		3E5BB9512BA06C920075E959 /* ForecastDayItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDayItemViewModel.swift; sourceTree = "<group>"; };
-		3E5BB9542BA0958B0075E959 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		3E5BB9562BA095990075E959 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		3E5BB9542BA0958B0075E959 /* LocationsSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsSettingsViewController.swift; sourceTree = "<group>"; };
+		3E5BB9562BA095990075E959 /* LocationsSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsSettingsViewModel.swift; sourceTree = "<group>"; };
 		3E63B38A2B74E0530043C90F /* ForecastHourItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastHourItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		3E63B38C2B74E0990043C90F /* ForecastHourCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastHourCarouselView.swift; sourceTree = "<group>"; };
 		3E63B38E2B74E19C0043C90F /* ForecastHoursViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastHoursViewModel.swift; sourceTree = "<group>"; };
@@ -178,14 +178,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		3E5BB9532BA094D20075E959 /* Settings */ = {
+		3E5BB9532BA094D20075E959 /* CitySettings */ = {
 			isa = PBXGroup;
 			children = (
 				3E0C958D2BA4339B0033922D /* Cities */,
-				3E5BB9562BA095990075E959 /* SettingsViewModel.swift */,
-				3E5BB9542BA0958B0075E959 /* SettingsViewController.swift */,
+				3E5BB9562BA095990075E959 /* LocationsSettingsViewModel.swift */,
+				3E5BB9542BA0958B0075E959 /* LocationsSettingsViewController.swift */,
 			);
-			path = Settings;
+			path = CitySettings;
 			sourceTree = "<group>";
 		};
 		3E63B3892B74E01A0043C90F /* ForecastTodayCarousel */ = {
@@ -244,7 +244,7 @@
 				3E76F3C92B68FA6900BF181F /* UI */,
 				3E76F3C42B68E90B00BF181F /* Utils */,
 				3E76F3C12B68E86900BF181F /* Main */,
-				3E5BB9532BA094D20075E959 /* Settings */,
+				3E5BB9532BA094D20075E959 /* CitySettings */,
 				3E76F3912B68E6BC00BF181F /* AppDelegate.swift */,
 				3E76F3932B68E6BC00BF181F /* SceneDelegate.swift */,
 				3E76F39C2B68E6BD00BF181F /* LaunchScreen.storyboard */,
@@ -479,7 +479,7 @@
 			files = (
 				3E76F3C62B68EAD800BF181F /* MVVMViewController.swift in Sources */,
 				3E63B38B2B74E0530043C90F /* ForecastHourItemCollectionViewCell.swift in Sources */,
-				3E5BB9552BA0958B0075E959 /* SettingsViewController.swift in Sources */,
+				3E5BB9552BA0958B0075E959 /* LocationsSettingsViewController.swift in Sources */,
 				3E8A3C9C2B72415C00620AB4 /* MainCarouselItem.swift in Sources */,
 				3E5BB94C2BA06BED0075E959 /* ForecastDaysCarouselView.swift in Sources */,
 				3E5BB94F2BA06C5D0075E959 /* ForecastDayCollectionViewCell.swift in Sources */,
@@ -504,7 +504,7 @@
 				3E76F3E32B6952DF00BF181F /* Reusable.swift in Sources */,
 				3E5BB9522BA06C920075E959 /* ForecastDayItemViewModel.swift in Sources */,
 				3E5BB9472BA060BD0075E959 /* Collection+Ext.swift in Sources */,
-				3E5BB9572BA095990075E959 /* SettingsViewModel.swift in Sources */,
+				3E5BB9572BA095990075E959 /* LocationsSettingsViewModel.swift in Sources */,
 				3E76F3DA2B69079400BF181F /* MainCarouselView.swift in Sources */,
 				3E76F3E12B69106700BF181F /* NetworkManager.swift in Sources */,
 				3E76F3D82B69019E00BF181F /* String+Ext.swift in Sources */,
