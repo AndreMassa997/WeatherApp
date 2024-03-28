@@ -22,7 +22,7 @@ class LocationsSettingsViewController: MVVMViewController<LocationsSettingsViewM
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "SETTINGS".localized
+        title = "SETTINGS.LOCATIONS_SETTINGS".localized
         setupNavigationBar(hasLargeTitle: true)
         tableView.delegate = self
         tableView.dataSource = self

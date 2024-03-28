@@ -107,6 +107,23 @@ class MainViewController: MVVMViewController<MainViewModel> {
     }
     
     @objc private func settingsTapped(){
+        showBottomSheetSettings()
+    }
+    
+    private func showBottomSheetSettings(){
+        let bottomSheet = UIAlertController(title: "SETTINGS".localized, message: nil, preferredStyle: .actionSheet)
+        bottomSheet.addAction(UIAlertAction(title: "SETTINGS.LOCATIONS_SETTINGS".localized, style: .default, handler: { [weak self] _ in
+            self?.openLocationsSettings()
+        }))
+        bottomSheet.addAction(UIAlertAction(title: "SETTINGS.SET_TEMPERATURE_C".localized, style: .default, handler: { _ in
+            
+        }))
+        
+        bottomSheet.addAction(UIAlertAction(title: "CANCEL".localized, style: .cancel))
+        self.present(bottomSheet, animated: true)
+    }
+    
+    private func openLocationsSettings(){
         let locationsSettingsViewModel = LocationsSettingsViewModel(cities: viewModel.cities, dataProvider: viewModel.dataProvider)
         let locationsSettingsVC = LocationsSettingsViewController(viewModel: locationsSettingsViewModel)
         self.navigationController?.pushViewController(locationsSettingsVC, animated: true)

@@ -11,8 +11,9 @@
 "MAIN.APP.TODAY" = "Today";
 "MAIN.APP.TOMORROW" = "Tomorrow";
 "SETTINGS" = "Settings";
-"SETTINGS.CITIES" = "Cities";
-"SETTINGS.TEMPERATURE_UDM" = "Temperature °C/°F";
+"SETTINGS.LOCATIONS_SETTINGS" = "Locations settings";
+"SETTINGS.SET_TEMPERATURE_C" = "Set Temperature to °C";
+"SETTINGS.SET_TEMPERATURE_F" = "Set Temperature to °F";
 "SETTINGS.DELETE_CITY_MESSAGE" = "Are you sure you want to delete the city of %@ from your saved locations?";
 "CANCEL" = "Cancel";
 "CONFIRM" = "Confirm";
