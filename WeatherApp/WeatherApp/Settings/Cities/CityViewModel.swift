@@ -5,10 +5,11 @@
 //  Created by Andrea Massari on 15/03/24.
 //
 
-import UIKit
+import Combine
 
 class CityViewModel: MVVMViewModel {
     let city: Location
+    let deleteButtonTap = PassthroughSubject<Void, Never>()
     
     init(city: Location, dataProvider: NetworkProvider) {
         self.city = city

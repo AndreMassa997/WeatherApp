@@ -32,6 +32,8 @@ class CityTableViewCell: UITableViewCell, Reusable {
         return btn
     }()
     
+    private weak var viewModel: CityViewModel?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubviews()
@@ -47,10 +49,13 @@ class CityTableViewCell: UITableViewCell, Reusable {
         self.viewContainer.addSubview(deleteButton)
         self.contentView.addSubview(viewContainer)
         setupLayout()
+        deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
     }
     
-    func configure(viewModel: CityViewModel){
+    func configure(viewModel: CityViewModel, isDeleteButtonVisible: Bool){
         locationLabel.text = viewModel.city.name.capitalized
+        deleteButton.isHidden = !isDeleteButtonVisible
+        self.viewModel = viewModel
     }
     
     private func setupLayout(){
@@ -70,5 +75,9 @@ class CityTableViewCell: UITableViewCell, Reusable {
             deleteButton.widthAnchor.constraint(equalToConstant: 20),
             deleteButton.heightAnchor.constraint(equalToConstant: 20)
         ])
+    }
+    
+    @objc private func deleteButtonTapped(){
+        viewModel?.deleteButtonTap.send()
     }
 }

@@ -46,6 +46,14 @@ class MainViewModel: MVVMViewModel {
         self.reload()
     }
     
+    func getCities(){
+        guard let savedCities = AppPreferences.shared.savedCities, self.cities != savedCities else {
+            return
+        }
+        self.cities = savedCities
+        self.reloadAll()
+    }
+    
     func reloadAll(){
         self.reload()
     }

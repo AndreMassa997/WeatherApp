@@ -52,6 +52,11 @@ class MainViewController: MVVMViewController<MainViewModel> {
         viewModel.getFirstTimeCity()        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.getCities()
+    }
+    
     override func bindProperties() {
         super.bindProperties()
         viewModel.$currentPage

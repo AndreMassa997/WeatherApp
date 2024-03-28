@@ -13,3 +13,6 @@
 "SETTINGS" = "Settings";
 "SETTINGS.CITIES" = "Cities";
 "SETTINGS.TEMPERATURE_UDM" = "Temperature °C/°F";
+"SETTINGS.DELETE_CITY_MESSAGE" = "Are you sure you want to delete the city of %@ from your saved locations?";
+"CANCEL" = "Cancel";
+"CONFIRM" = "Confirm";

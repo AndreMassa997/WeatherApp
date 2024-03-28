@@ -8,8 +8,12 @@
 import Foundation
 
 extension String{
-    var localized: String {
+    var localized: String{
         return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
+    }
+    
+    func localized(with attributes: CVarArg...) -> String{
+        String(format: self.localized, attributes)
     }
     
     func toDate(with format: String = "yyyy-MM-dd HH:mm") -> Date?{
