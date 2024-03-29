@@ -16,9 +16,8 @@ class MainViewModel: MVVMViewModel {
     var cities: [Location] = []
     private lazy var getNoDataSavedLocation: [Location] = {
         return [
-            Location(name: "London", region: "City of London, Greater London", country: "United Kingdom", lat: 51.52, lon: -0.11),
-            Location(name: "Paris", region: "Ile-de-France", country: "France", lat: 33.66, lon: -95.56),
-            Location(name: "Berlin", region: "Berlin", country: "Germany", lat: 52.52, lon: 13.4),
+            Location(id: 2801268, name: "London", region: "City of London, Greater London", country: "United Kingdom", lat: 51.52, lon: -0.11),
+            Location(id: 803267, name: "Paris", region: "Ile-de-France", country: "France", lat: 33.66, lon: -95.56)
         ]
     }()
     

@@ -14,6 +14,11 @@
 "SETTINGS.LOCATIONS_SETTINGS" = "Locations settings";
 "SETTINGS.SET_TEMPERATURE_C" = "Set Temperature to °C";
 "SETTINGS.SET_TEMPERATURE_F" = "Set Temperature to °F";
-"SETTINGS.DELETE_CITY_MESSAGE" = "Are you sure you want to delete the city of %@ from your saved locations?";
+"SETTINGS.CITY_MESSAGE_POPUP" = "Are you sure you want to %@ the city of %@ %@ your saved locations?";
+"SETTINGS.ADD" = "Add";
+"SETTINGS.DELETE" = "Delete";
+"SETTINGS.TO" = "To";
+"SETTINGS.FROM" = "From";
 "CANCEL" = "Cancel";
 "CONFIRM" = "Confirm";
+"SETTINGS.SEARCH_CITIES" = "Search cities";

@@ -36,8 +36,8 @@ class MVVMViewController<ViewModel: MVVMViewModel>: UIViewController{
         self.view.backgroundColor = backgroundColor
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = self.isNavigationBarHidden
     }
     

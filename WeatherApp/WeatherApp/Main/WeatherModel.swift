@@ -15,12 +15,38 @@ struct WeatherModel: MVVMModel{
     let forecast: Forecast
 }
 
-struct Location: MVVMModel{
+struct Location: MVVMModel, Identifiable{
+    let id: Int?
     let name: String
     let region: String
     let country: String
     let lat: Double
     let lon: Double
+    
+    var getFlagEmoj: String?{
+        guard let path = Bundle.main.path(forResource: "flags", ofType: "json") else {
+            return nil
+        }
+        
+        let url: URL
+        if #available(iOS 16.0, *) {
+            url = URL(filePath: path)
+        } else {
+            url = URL(fileURLWithPath: path)
+        }
+        
+        guard let data = try? Data(contentsOf: url) else {
+            return nil
+        }
+        
+        let allFlagJson = try? JSONDecoder().decode([Flag].self, from: data)
+        return allFlagJson?.first(where: { $0.name == country })?.flag
+    }
+}
+
+fileprivate struct Flag: Codable{
+    let name: String
+    let flag: String
 }
 
 struct Current: MVVMModel{

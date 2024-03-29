@@ -24,10 +24,9 @@ class CityTableViewCell: UITableViewCell, Reusable {
         return lbl
     }()
     
-    private let deleteButton: UIButton = {
+    private let rightButton: UIButton = {
         let btn = UIButton()
         btn.setTitle(nil, for: .normal)
-        btn.setImage(UIImage(systemName: "trash"), for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
@@ -46,15 +45,16 @@ class CityTableViewCell: UITableViewCell, Reusable {
     
     private func addSubviews(){
         self.viewContainer.addSubview(locationLabel)
-        self.viewContainer.addSubview(deleteButton)
+        self.viewContainer.addSubview(rightButton)
         self.contentView.addSubview(viewContainer)
         setupLayout()
-        deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+        rightButton.addTarget(self, action: #selector(rightButtonTapped), for: .touchUpInside)
     }
     
-    func configure(viewModel: CityViewModel, isDeleteButtonVisible: Bool){
-        locationLabel.text = viewModel.city.name.capitalized
-        deleteButton.isHidden = !isDeleteButtonVisible
+    func configure(viewModel: CityViewModel){
+        locationLabel.text = viewModel.locationNameAndFlag
+        rightButton.isHidden = viewModel.rightButtonHidden
+        rightButton.setImage(UIImage(systemName: viewModel.rightButtonImageName), for: .normal)
         self.viewModel = viewModel
     }
     
@@ -68,16 +68,16 @@ class CityTableViewCell: UITableViewCell, Reusable {
             locationLabel.leftAnchor.constraint(equalTo: viewContainer.leftAnchor, constant: 15),
             locationLabel.topAnchor.constraint(equalTo: viewContainer.topAnchor, constant: 10),
             locationLabel.bottomAnchor.constraint(equalTo: viewContainer.bottomAnchor, constant: -10),
-            locationLabel.rightAnchor.constraint(equalTo: deleteButton.leftAnchor, constant: -10),
+            locationLabel.rightAnchor.constraint(equalTo: rightButton.leftAnchor, constant: -10),
             
-            deleteButton.centerYAnchor.constraint(equalTo: viewContainer.centerYAnchor),
-            deleteButton.rightAnchor.constraint(equalTo: viewContainer.rightAnchor, constant: -15),
-            deleteButton.widthAnchor.constraint(equalToConstant: 20),
-            deleteButton.heightAnchor.constraint(equalToConstant: 20)
+            rightButton.centerYAnchor.constraint(equalTo: viewContainer.centerYAnchor),
+            rightButton.rightAnchor.constraint(equalTo: viewContainer.rightAnchor, constant: -15),
+            rightButton.widthAnchor.constraint(equalToConstant: 20),
+            rightButton.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
     
-    @objc private func deleteButtonTapped(){
-        viewModel?.deleteButtonTap.send()
+    @objc private func rightButtonTapped(){
+        viewModel?.rightButtonTap.send()
     }
 }
