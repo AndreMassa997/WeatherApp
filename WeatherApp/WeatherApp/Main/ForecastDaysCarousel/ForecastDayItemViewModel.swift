@@ -32,11 +32,15 @@ final class ForecastDayItemViewModel: MVVMViewModel{
     }
     
     var minTemperatureString: String?{
-        String(format: "%.0f°C", data.day.mintempC)
+        let temperatureUnit = AppPreferences.shared.temperatureUnit
+        let temperature = temperatureUnit == .celsius ? data.day.mintempC : data.day.mintempF
+        return String(format: "%.0f%@", temperature, temperatureUnit.rawValue)
     }
     
     var maxTemperatureString: String?{
-        String(format: "%.0f°C", data.day.maxtempC)
+        let temperatureUnit = AppPreferences.shared.temperatureUnit
+        let temperature = temperatureUnit == .celsius ? data.day.maxtempC : data.day.maxtempF
+        return String(format: "%.0f%@", temperature, temperatureUnit.rawValue)
     }
     
 }

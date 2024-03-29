@@ -29,7 +29,9 @@ final class ForecastHourItemViewModel: MVVMViewModel{
     }
     
     var temperatureString: String?{
-        String(format: "%.0f°C", data.tempC)
+        let temperatureUnit = AppPreferences.shared.temperatureUnit
+        let temperature = temperatureUnit == .celsius ? data.tempC : data.tempF
+        return String(format: "%.0f%@", temperature, temperatureUnit.rawValue)
     }
     
 }

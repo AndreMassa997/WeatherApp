@@ -18,10 +18,12 @@ final class MainCarouselItemViewModel: MVVMViewModel{
     }
     
     var temperatureString: NSAttributedString?{
-        guard let temperature = data.currentWeather?.current.tempC else { return nil
+        guard let currentWeather = data.currentWeather else { return nil
         }
-        let mutableAttributed = NSMutableAttributedString(string: String(format: "%.0f", temperature), attributes: [.font: UIFont.systemFont(ofSize: 52, weight: .light)])
-        mutableAttributed.append(NSAttributedString(string: " °C", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .light)]))
+        let temperatureUnit = AppPreferences.shared.temperatureUnit
+        let temperature = temperatureUnit == .celsius ? currentWeather.current.tempC : currentWeather.current.tempF
+        let mutableAttributed = NSMutableAttributedString(string: String(format: "%.0f ", temperature), attributes: [.font: UIFont.systemFont(ofSize: 52, weight: .light)])
+        mutableAttributed.append(NSAttributedString(string: temperatureUnit.rawValue, attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .light)]))
         return mutableAttributed
     }
     
@@ -45,8 +47,12 @@ final class MainCarouselItemViewModel: MVVMViewModel{
     }
     
     var minMaxTemperature: String?{
-        guard let minTemperature = data.currentWeather?.forecast.forecastday.first?.day.mintempC, let maxTemperature = data.currentWeather?.forecast.forecastday.first?.day.maxtempC else { return nil }
-        return String(format: "%.0f / %.0f °C", minTemperature, maxTemperature)
+        guard let day = data.currentWeather?.forecast.forecastday.first?.day else { return nil
+        }
+        let temperatureUnit = AppPreferences.shared.temperatureUnit
+        let minTemperature = temperatureUnit == .celsius ? day.mintempC : day.mintempF
+        let maxTemperature = temperatureUnit == .celsius ? day.maxtempC : day.maxtempF
+        return String(format: "%.0f / %.0f %@", minTemperature, maxTemperature, temperatureUnit.rawValue)
     }
     
     var hourCarouselData: [Hour]?{

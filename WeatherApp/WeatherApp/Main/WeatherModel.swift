@@ -52,6 +52,7 @@ fileprivate struct Flag: Codable{
 struct Current: MVVMModel{
     let lastUpdatedEpoch: TimeInterval
     let tempC: Double
+    let tempF: Double
     let condition: Condition
     let windKph: Double
     let isDay: Int
@@ -75,11 +76,14 @@ struct Day: MVVMModel{
     let condition: Condition
     let maxtempC: Double
     let mintempC: Double
+    let maxtempF: Double
+    let mintempF: Double
 }
 
 struct Hour: MVVMModel{
     let time: String
     let tempC: Double
+    let tempF: Double
     let condition: Condition
 }
 

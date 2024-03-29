@@ -28,6 +28,9 @@ class MainViewModel: MVVMViewModel {
         return currentWeather.current.condition.code.getSkyColor(isDay: currentWeather.current._isDay)
     }
     
+    var setTemperatureMessage: String{
+        AppPreferences.shared.temperatureUnit == .celsius ? "SETTINGS.SET_TEMPERATURE_F".localized : "SETTINGS.SET_TEMPERATURE_C".localized
+    }
     
     func updateCurrentPage(_ page: Int?){
         guard let page else { return }
@@ -41,7 +44,6 @@ class MainViewModel: MVVMViewModel {
             cities = getNoDataSavedLocation
             AppPreferences.shared.savedCities = cities
         }
-        
         self.reload()
     }
     
@@ -55,6 +57,19 @@ class MainViewModel: MVVMViewModel {
     
     func reloadAll(){
         self.reload()
+    }
+    
+    func changeTemperatureUnit(){
+        if AppPreferences.shared.temperatureUnit == .celsius{
+            AppPreferences.shared.temperatureUnit = .fahrenheit
+        }else{
+            AppPreferences.shared.temperatureUnit = .celsius
+        }
+        refresh()
+    }
+    
+    private func refresh(){
+        self.currentPage = currentPage
     }
     
     private func reload(){

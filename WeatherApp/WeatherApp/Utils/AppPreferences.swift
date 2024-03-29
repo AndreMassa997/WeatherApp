@@ -17,6 +17,7 @@ class AppPreferences{
         }
     }
     
+    @RawRapresentableUserDefault(key: "temperatureUnit", defaultValue: TemperatureUnit.celsius.rawValue) var temperatureUnit: TemperatureUnit
     @CodableUserDefault(key: "savedCities") var savedCities: [Location]?
     
     var numberOfDays: Int{
@@ -29,6 +30,27 @@ class AppPreferences{
     
     private func getUserPreferences(name: String) -> Any?{
         UserDefaults.standard.object(forKey: name)
+    }
+}
+
+enum TemperatureUnit: String{
+    case celsius = "°C"
+    case fahrenheit = "°F"
+}
+
+@propertyWrapper
+struct RawRapresentableUserDefault<Value: RawRepresentable>{
+    let key: String
+    let defaultValue: Value.RawValue
+    
+    var wrappedValue: Value{
+        get{
+            let rawValue: Value.RawValue = (UserDefaults.standard.object(forKey: key) ?? defaultValue) as! Value.RawValue
+            return Value(rawValue: rawValue)!
+        }
+        set{
+            UserDefaults.standard.set(newValue.rawValue, forKey: key)
+        }
     }
 }
 
