@@ -32,11 +32,21 @@ final class MainCarouselItemViewModel: MVVMViewModel{
         return "MAIN.APP.LAST_UPDATE".localized + Date(timeIntervalSince1970: lastUpdate).format(format: "HH:mm")
     }
     
-    var mainNameString: String{
+    var cityNameString: String{
         guard let name = data.currentWeather?.location.name else {
             return data.city.name.capitalized
         }
         return name.capitalized
+    }
+    
+    var countryNameString: String{
+        guard let location = data.currentWeather?.location else {
+            return data.city.country.capitalized
+        }
+        guard let flag = location.getFlagEmoj else {
+            return location.country.capitalized
+        }
+        return location.country.capitalized + " " + flag
     }
     
     var currentWeatherCondition: String?{

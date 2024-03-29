@@ -42,9 +42,15 @@ final class MainCarouselItem: UICollectionViewCell, Reusable{
         return lbl
     }()
     
-    private lazy var mainName: UILabel = {
+    private lazy var cityLabel: UILabel = {
         let lbl = UILabel()
         lbl.font = UIFont.systemFont(ofSize: 28, weight: .semibold)
+        return lbl
+    }()
+    
+    private lazy var countryLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.font = UIFont.systemFont(ofSize: 18, weight: .light)
         return lbl
     }()
     
@@ -77,7 +83,8 @@ final class MainCarouselItem: UICollectionViewCell, Reusable{
     
     private func addSubviews(){
         stackView.addArrangedSubview(lastUpdatedLabel)
-        stackView.addArrangedSubview(mainName)
+        stackView.addArrangedSubview(cityLabel)
+        stackView.addArrangedSubview(countryLabel)
         stackView.addArrangedSubview(currentTemperature)
         stackView.addArrangedSubview(minMaxTemperature)
         stackView.addArrangedSubview(currentWeather)
@@ -113,7 +120,8 @@ final class MainCarouselItem: UICollectionViewCell, Reusable{
     
     func configure(viewModel: MainCarouselItemViewModel){
         self.viewModel = viewModel
-        self.mainName.text = viewModel.mainNameString
+        self.cityLabel.text = viewModel.cityNameString
+        self.countryLabel.text = viewModel.countryNameString
         self.currentWeather.text = viewModel.currentWeatherCondition
         self.currentTemperature.attributedText = viewModel.temperatureString
         self.minMaxTemperature.text = viewModel.minMaxTemperature
