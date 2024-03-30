@@ -32,7 +32,7 @@ class MainViewModel: MVVMViewModel {
         return currentWeather.current.condition.code.getSkyColor(isDay: currentWeather.current._isDay)
     }
     
-    var setTemperatureMessage: String{
+    var temperatureSettingsMessage: String{
         AppPreferences.shared.temperatureUnit == .celsius ? "SETTINGS.SET_TEMPERATURE_F".localized : "SETTINGS.SET_TEMPERATURE_C".localized
     }
     
@@ -69,10 +69,6 @@ class MainViewModel: MVVMViewModel {
         }else{
             temperatureUnit = .celsius
         }
-    }
-    
-    private func refreshUI(){
-        self.currentPage = currentPage
     }
     
     private func reload(){

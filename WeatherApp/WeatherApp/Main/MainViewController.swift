@@ -115,7 +115,7 @@ class MainViewController: MVVMViewController<MainViewModel> {
         bottomSheet.addAction(UIAlertAction(title: "SETTINGS.LOCATIONS_SETTINGS".localized, style: .default, handler: { [weak self] _ in
             self?.openLocationsSettings()
         }))
-        bottomSheet.addAction(UIAlertAction(title: viewModel.setTemperatureMessage, style: .default, handler: { [weak self] _ in
+        bottomSheet.addAction(UIAlertAction(title: viewModel.temperatureSettingsMessage, style: .default, handler: { [weak self] _ in
             self?.viewModel.changeTemperatureUnit()
         }))
         
