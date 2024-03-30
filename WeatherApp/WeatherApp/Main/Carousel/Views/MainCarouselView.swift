@@ -35,6 +35,13 @@ class MainCarouselView: UICollectionView {
                 self?.reloadData()
             })
             .store(in: &viewModel.anyCancellables)
+        
+        viewModel.$temperatureUnit
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] _ in
+                self?.reloadData()
+            })
+            .store(in: &viewModel.anyCancellables)
     }
     
     func scrollToItem(at index: Int){

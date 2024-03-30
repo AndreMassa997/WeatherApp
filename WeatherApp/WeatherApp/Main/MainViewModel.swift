@@ -9,9 +9,13 @@ import Combine
 import UIKit
 
 class MainViewModel: MVVMViewModel {
-    
     @Published private(set) var weatherForCity: [WeatherForCity] = []
     @Published private(set) var currentPage: Int = 0
+    @Published private (set) var temperatureUnit: TemperatureUnit = AppPreferences.shared.temperatureUnit {
+        willSet{
+            AppPreferences.shared.temperatureUnit = newValue
+        }
+    }
     
     var cities: [Location] = []
     private lazy var getNoDataSavedLocation: [Location] = {
@@ -60,15 +64,14 @@ class MainViewModel: MVVMViewModel {
     }
     
     func changeTemperatureUnit(){
-        if AppPreferences.shared.temperatureUnit == .celsius{
-            AppPreferences.shared.temperatureUnit = .fahrenheit
+        if temperatureUnit == .celsius{
+            temperatureUnit = .fahrenheit
         }else{
-            AppPreferences.shared.temperatureUnit = .celsius
+            temperatureUnit = .celsius
         }
-        refresh()
     }
     
-    private func refresh(){
+    private func refreshUI(){
         self.currentPage = currentPage
     }
     
